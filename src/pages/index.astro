@@ -7,37 +7,259 @@ import { AppPichangas } from '../components/AppPichangas';
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pichangas Arequipa | Directorio de Canchas y Convocatorias</title>
+    <title>CanchaSearch | ¡Encuentra y separa tu cancha en Arequipa!</title>
     <script is:inline src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-500 selection:text-white">
-    <!-- Hero Section Deportivo Oscuro -->
-    <header class="relative bg-slate-900 text-white overflow-hidden border-b-4 border-emerald-500">
-      <!-- Imagen de fondo de cancha nocturna -->
-      <div class="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1518605368461-1ee7e543b66f?auto=format&fit=crop&w=1600&q=80"
-          alt="Cancha de grass sintético nocturna"
-          class="w-full h-full object-cover opacity-35"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/95"></div>
+  <body id="inicio" class="bg-[#f4f6f8] text-slate-900 antialiased selection:bg-[#16913f] selection:text-white">
+    <!-- Barra de Navegación Superior (CanchaSearch) -->
+    <nav class="bg-white border-b border-slate-200/80">
+      <div class="max-w-[1360px] mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+        <!-- Logo CanchaSearch -->
+        <a href="#inicio" class="flex items-center gap-2.5 group">
+          <div class="relative flex items-center justify-center">
+            <svg class="w-10 h-11" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Sombra base del pin -->
+              <ellipse cx="20" cy="43" rx="8" ry="2.2" fill="#cbd5e1" />
+              <!-- Cuerpo del pin verde -->
+              <path
+                d="M20 1C9.50659 1 1 9.50659 1 20C1 31.25 20 43.5 20 43.5C20 43.5 39 31.25 39 20C39 9.50659 30.4934 1 20 1Z"
+                fill="#16913f"
+              />
+              <!-- Círculo interior blanco/balón -->
+              <circle cx="20" cy="19" r="11.5" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+              <!-- Pentágono central y líneas del balón de fútbol -->
+              <polygon points="20,13.5 24.5,16.8 22.8,22 17.2,22 15.5,16.8" fill="#0f172a" />
+              <line x1="20" y1="13.5" x2="20" y2="8" stroke="#0f172a" stroke-width="1.6" />
+              <line x1="24.5" y1="16.8" x2="30.5" y2="15" stroke="#0f172a" stroke-width="1.6" />
+              <line x1="22.8" y1="22" x2="27" y2="27.5" stroke="#0f172a" stroke-width="1.6" />
+              <line x1="17.2" y1="22" x2="13" y2="27.5" stroke="#0f172a" stroke-width="1.6" />
+              <line x1="15.5" y1="16.8" x2="9.5" y2="15" stroke="#0f172a" stroke-width="1.6" />
+            </svg>
+          </div>
+          <span class="text-2xl font-extrabold tracking-tight text-slate-900">
+            Cancha<span class="text-[#16913f]">Search</span>
+          </span>
+        </a>
+
+        <!-- Enlaces centrales -->
+        <div class="hidden md:flex items-center gap-9 text-[15px] font-medium text-slate-800">
+          <a href="#inicio" class="hover:text-[#16913f] transition">Inicio</a>
+          <a
+            href="#explorar-canchas"
+            id="nav-explorar"
+            class="hover:text-[#16913f] transition"
+          >
+            Explorar Canchas
+          </a>
+          <a
+            href="#explorar-canchas"
+            id="nav-como-funciona"
+            class="hover:text-[#16913f] transition"
+          >
+            ¿Cómo funciona?
+          </a>
+          <a href="#nosotros" class="hover:text-[#16913f] transition">Nosotros</a>
+        </div>
+
+        <!-- Botón Registrarse -->
+        <div>
+          <a
+            href="#explorar-canchas"
+            id="btn-registrarse"
+            class="inline-flex items-center justify-center bg-[#16913f] hover:bg-[#127a34] text-white font-semibold text-[15px] px-6 py-2.5 rounded-xl shadow-xs transition"
+          >
+            Registrarse
+          </a>
+        </div>
       </div>
+    </nav>
 
-      <!-- Contenido del Hero -->
-      <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-4 py-1.5 text-xs sm:text-sm font-semibold text-emerald-300 mb-5 backdrop-blur-xs">
-          📍 Arequipa, Perú • Canchas de Grass Sintético
-        </span>
+    <!-- Hero Section Dividido (Izquierda: Buscador / Derecha: Ilustración Volcán Misti) -->
+    <header class="bg-[#f4f6f8] border-b border-slate-200 overflow-hidden">
+      <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[620px]">
+        <!-- Columna Izquierda: Título, subtítulo y tarjeta buscadora -->
+        <div class="lg:col-span-6 px-6 sm:px-12 lg:pl-16 lg:pr-12 py-10 sm:py-14 flex flex-col justify-center">
+          <h1 class="text-4xl sm:text-[44px] font-extrabold text-[#111827] leading-[1.14] tracking-tight mb-4">
+            ¡Encuentra y separa tu cancha en Arequipa!
+          </h1>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
-          La pichanga no se cancela
-        </h1>
+          <p class="text-slate-700 text-base sm:text-[17px] leading-relaxed mb-7 max-w-xl">
+            Busca, reserva y juega en los mejores complejos deportivos de la ciudad, con la mejor vista del majestuoso Misti. Al instante y con confirmación inmediata.
+          </p>
 
-        <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 leading-relaxed">
-          Encuentra y reserva al instante en las mejores canchas cerca de{' '}
-          <span class="text-white font-semibold">San Lázaro / UCSP, Cercado, Bustamante y Miraflores</span>,
-          o completa los jugadores que te faltan para tu partido de hoy.
-        </p>
+          <!-- Tarjeta Blanca del Buscador -->
+          <form
+            id="hero-search-form"
+            class="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/80 max-w-xl"
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Columna Izquierda del Formulario: Selector de Distrito -->
+              <div class="relative">
+                <label class="flex items-center gap-1.5 text-[15px] font-bold text-slate-900 mb-2">
+                  <span class="text-red-600 text-base leading-none">📍</span>
+                  Distrito
+                </label>
+
+                <!-- Botón del Dropdown Personalizado -->
+                <button
+                  type="button"
+                  id="distrito-dropdown-btn"
+                  class="w-full flex items-center justify-between rounded-lg border-2 border-[#16913f] bg-white px-3.5 py-2.5 text-left text-[15px] text-slate-800 font-medium focus:outline-none cursor-pointer"
+                >
+                  <span id="distrito-selected-label">Yanahuara</span>
+                  <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                <!-- Lista de opciones estilo tarjeta (abierta inicialmente como en el diseño o interactiva) -->
+                <div
+                  id="distrito-dropdown-menu"
+                  class="mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-md overflow-hidden divide-y divide-slate-100 text-[15px] text-slate-800"
+                >
+                  <button
+                    type="button"
+                    data-distrito="Cayma"
+                    class="distrito-option w-full text-left px-3.5 py-2 bg-slate-100/90 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Cayma
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="José Luis Bustamante y Rivero"
+                    data-label="J.L. Bustamante y Rivero"
+                    class="distrito-option w-full text-left px-3.5 py-2 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    J.L. Bustamante y Rivero
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Cerro Colorado"
+                    class="distrito-option w-full text-left px-3.5 py-2 bg-slate-100/90 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Cerro Colorado
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Cercado"
+                    class="distrito-option w-full text-left px-3.5 py-2 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Cercado
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Yanahuara"
+                    class="distrito-option hidden w-full text-left px-3.5 py-2 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Yanahuara
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Miraflores"
+                    class="distrito-option hidden w-full text-left px-3.5 py-2 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Miraflores
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Sachaca"
+                    class="distrito-option hidden w-full text-left px-3.5 py-2 hover:bg-emerald-50 transition cursor-pointer"
+                  >
+                    Sachaca
+                  </button>
+                  <button
+                    type="button"
+                    data-distrito="Todos"
+                    data-label="Todos los distritos"
+                    class="distrito-option hidden w-full text-left px-3.5 py-2 hover:bg-emerald-50 text-emerald-700 font-semibold transition cursor-pointer"
+                  >
+                    Ver todos los distritos
+                  </button>
+                </div>
+              </div>
+
+              <!-- Columna Derecha del Formulario: Deporte y Fecha/Hora -->
+              <div class="flex flex-col justify-between gap-4">
+                <div>
+                  <label for="hero-deporte" class="flex items-center gap-1.5 text-[15px] font-bold text-slate-900 mb-2">
+                    <span class="text-base leading-none">⚽</span>
+                    Deporte
+                  </label>
+                  <input
+                    id="hero-deporte"
+                    type="text"
+                    placeholder="Fútbol, Básquet, etc."
+                    class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-800 placeholder-slate-400 focus:border-[#16913f] focus:outline-none focus:ring-2 focus:ring-[#16913f]/20"
+                  />
+                </div>
+
+                <div>
+                  <label for="hero-fecha" class="flex items-center gap-1.5 text-[15px] font-bold text-slate-900 mb-2">
+                    <span class="text-base leading-none">⌚</span>
+                    Fecha y Hora
+                  </label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </span>
+                    <input
+                      id="hero-fecha"
+                      type="text"
+                      onfocus="(this.type='datetime-local')"
+                      onblur="if(!this.value)this.type='text'"
+                      placeholder="Fecha y de juego"
+                      class="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3.5 py-2.5 text-[15px] text-slate-800 placeholder-slate-400 focus:border-[#16913f] focus:outline-none focus:ring-2 focus:ring-[#16913f]/20"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botón Principal Buscar Cancha -->
+            <button
+              type="submit"
+              class="w-full mt-5 bg-[#16913f] hover:bg-[#127a34] text-white font-bold text-lg py-3.5 rounded-xl shadow-sm transition cursor-pointer"
+            >
+              Buscar cancha
+            </button>
+          </form>
+
+          <!-- Indicador de confianza inferior -->
+          <div class="mt-5 flex items-center gap-2 text-[15px] font-medium text-slate-800">
+            <span class="text-amber-400 text-lg leading-none">⭐</span>
+            <span>Más de 10,000 pichangueros en +50 complejos</span>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Imagen de Arequipa / Volcán Misti (volcan.webp) + Badge Flotante -->
+        <div class="lg:col-span-6 relative min-h-[420px] lg:min-h-full">
+          <img
+            src="/volcan.webp"
+            alt="Vista del Volcán Misti y canchas en Arequipa"
+            class="w-full h-full object-cover block"
+          />
+
+          <!-- Tarjeta flotante superior derecha: Complejo El Golazo -->
+          <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-xs rounded-2xl p-3 shadow-lg border border-white flex items-center gap-3.5 max-w-[260px]">
+            <div class="leading-snug">
+              <p class="text-xs font-semibold text-slate-800">Complejo El Golazo -</p>
+              <p class="text-xs font-extrabold text-slate-900">S/. 70/hr</p>
+              <div class="flex items-center text-amber-400 text-xs mt-1 tracking-tight" aria-label="5 estrellas">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=240&q=80"
+              alt="Miniatura Complejo El Golazo"
+              class="w-20 h-14 rounded-lg object-cover border border-slate-200 shrink-0"
+            />
+          </div>
+        </div>
       </div>
     </header>
 
@@ -47,13 +269,90 @@ import { AppPichangas } from '../components/AppPichangas';
     </main>
 
     <!-- Pie de página -->
-    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 text-center text-sm">
+    <footer id="nosotros" class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 text-center text-sm">
       <div class="max-w-7xl mx-auto px-4">
-        <p class="font-medium text-slate-300">⚽ Pichangas Arequipa &copy; 2026</p>
+        <p class="font-medium text-slate-300">⚽ CanchaSearch Arequipa &copy; 2026</p>
         <p class="text-xs text-slate-500 mt-1">
-          Directorio verificado de complejos deportivos y convocatorias en tiempo real.
+          Directorio verificado de complejos deportivos y convocatorias en tiempo real en Arequipa.
         </p>
       </div>
     </footer>
+
+    <!-- Script de interacción del Hero con el catálogo React -->
+    <script is:inline>
+      (function () {
+        let currentDistrito = 'Yanahuara';
+        const dropdownBtn = document.getElementById('distrito-dropdown-btn');
+        const selectedLabel = document.getElementById('distrito-selected-label');
+        const options = document.querySelectorAll('.distrito-option');
+        const searchForm = document.getElementById('hero-search-form');
+        const deporteInput = document.getElementById('hero-deporte');
+
+        // Alternar visibilidad de opciones extra al hacer clic en el selector
+        let expanded = false;
+        if (dropdownBtn) {
+          dropdownBtn.addEventListener('click', () => {
+            expanded = !expanded;
+            options.forEach((opt, index) => {
+              if (index >= 4) {
+                opt.classList.toggle('hidden', !expanded);
+              }
+            });
+          });
+        }
+
+        // Seleccionar un distrito de la lista
+        options.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const dist = btn.getAttribute('data-distrito') || 'Todos';
+            const label = btn.getAttribute('data-label') || dist;
+            currentDistrito = dist;
+            if (selectedLabel) selectedLabel.textContent = label;
+
+            options.forEach((o) => o.classList.remove('bg-emerald-50', 'font-semibold', 'text-[#16913f]'));
+            btn.classList.add('bg-emerald-50', 'font-semibold', 'text-[#16913f]');
+          });
+        });
+
+        // Al enviar "Buscar cancha", filtrar el directorio de abajo y hacer scroll suave
+        if (searchForm) {
+          searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const busqueda = deporteInput ? deporteInput.value : '';
+            window.dispatchEvent(
+              new CustomEvent('canchasearch:filter', {
+                detail: { distrito: currentDistrito, busqueda },
+              })
+            );
+            const target = document.getElementById('explorar-canchas');
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
+
+        // Conectar enlaces del navbar con las pestañas de React
+        const navExplorar = document.getElementById('nav-explorar');
+        const navComoFunciona = document.getElementById('nav-como-funciona');
+        const btnRegistrarse = document.getElementById('btn-registrarse');
+
+        if (navExplorar) {
+          navExplorar.addEventListener('click', () => {
+            window.dispatchEvent(
+              new CustomEvent('canchasearch:switch-tab', { detail: { tab: 'canchas' } })
+            );
+          });
+        }
+
+        const goToPartidos = () => {
+          window.dispatchEvent(
+            new CustomEvent('canchasearch:switch-tab', { detail: { tab: 'partidos' } })
+          );
+        };
+
+        if (navComoFunciona) navComoFunciona.addEventListener('click', goToPartidos);
+        if (btnRegistrarse) btnRegistrarse.addEventListener('click', goToPartidos);
+      })();
+    </script>
   </body>
 </html>

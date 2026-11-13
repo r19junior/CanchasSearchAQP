@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CatalogoCanchas } from './CatalogoCanchas';
 import { FormNuevaConvocatoria } from './FormNuevaConvocatoria';
 import { ListaConvocatorias } from './ListaConvocatorias';
@@ -9,12 +9,32 @@ export const AppPichangas: React.FC = () => {
   const [tabActiva, setTabActiva] = useState<TabActiva>('canchas');
   const [refreshKey, setRefreshKey] = useState(0);
 
+  useEffect(() => {
+    const handleSwitchTab = (e: Event) => {
+      const customEvent = e as CustomEvent<{ tab: TabActiva }>;
+      if (customEvent.detail?.tab) {
+        setTabActiva(customEvent.detail.tab);
+      }
+    };
+
+    const handleFilter = () => {
+      setTabActiva('canchas');
+    };
+
+    window.addEventListener('canchasearch:switch-tab', handleSwitchTab);
+    window.addEventListener('canchasearch:filter', handleFilter);
+    return () => {
+      window.removeEventListener('canchasearch:switch-tab', handleSwitchTab);
+      window.removeEventListener('canchasearch:filter', handleFilter);
+    };
+  }, []);
+
   const handleConvocatoriaCreada = () => {
     setRefreshKey((prev) => prev + 1);
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div id="explorar-canchas" className="min-h-screen bg-[#f4f6f8] scroll-mt-4">
       {/* Barra de navegación sticky con pestañas tipo píldora */}
       <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-center">
@@ -24,7 +44,7 @@ export const AppPichangas: React.FC = () => {
               onClick={() => setTabActiva('canchas')}
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
                 tabActiva === 'canchas'
-                  ? 'bg-emerald-600 text-white shadow-sm'
+                  ? 'bg-[#16913f] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -35,7 +55,7 @@ export const AppPichangas: React.FC = () => {
               onClick={() => setTabActiva('partidos')}
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
                 tabActiva === 'partidos'
-                  ? 'bg-emerald-600 text-white shadow-sm'
+                  ? 'bg-[#16913f] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
